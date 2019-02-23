@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head ('Welcome!')" />
+<body class="grey darken-2">
+    <script th:replace="partials :: j-query" />
+    <header>
+
+        <nav th:replace="partials :: navbar" />
+
+    </header>
+
+    <main class="container">
+        <div class="card white">
+            <div class="card-image">
+                <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Hello and Welcome to the Texas Educators Network</h3>
+                <p>T.E.N. is designed as a resource for educators to keep tabs on where students are located within the T.E.N. member schools.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="partials :: ten-footer" />
+    <script th:replace="partials :: m-script" />
+    <script th:replace="partials :: modals-js" />
+</body>
+</html>

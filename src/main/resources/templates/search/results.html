@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head ('Welcome!')" />
+<body class="grey darken-2">
+<script th:replace="partials :: j-query" />
+<header>
+
+    <nav th:replace="partials :: navbar" />
+
+</header>
+
+<main class="container">
+    <div class="card white">
+        <div class="card-image">
+            <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Search Results</h3>
+            <p>Showing the results for: "<i><span th:text="${query}" /></i>"</p>
+            <table>
+                <tr>
+                    <th>
+                        Student ID
+                    </th>
+                    <th>
+                        Student Name
+                    </th>
+                    <th>
+                        Campus
+                    </th>
+                    <th>
+                        Grade Level
+                    </th>
+                    <th>
+                        Entry Date
+                    </th>
+                    <th>
+                        School Year
+                    </th>
+                </tr>
+                <tr th:each="student : ${searchResults}">
+                    <td th:text="${student.studentId}" />
+                    <td th:text="${student.name}" />
+                    <td th:text="${student.campus.campus_id}" />
+                    <td th:text="${student.gradeLevel}" />
+                    <td th:text="${student.entryDate}" />
+                    <td th:text="${student.schoolYear}" />
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="partials :: ten-footer" />
+<script th:replace="partials :: m-script" />
+<script th:replace="partials :: modals-js" />
+</body>
+</html>

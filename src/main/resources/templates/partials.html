@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="head (title)">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <link rel="stylesheet" th:href="@{/css/master.css}" type="text/css" />
+
+    <title th:text="${title}"></title>
+</head>
+
+<body class="grey-text text-darken-4">
+    <nav th:fragment="navbar" class="black">
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="/"><img src="../static/img/TEN.png" th:src="@{~/img/TEN.png}" alt="logo" class="ten-logo" /></a>
+                <ul id="nav-mobile" class="right">
+                    <li sec:authorize="isAuthenticated()"><a href="#search-modal" class="amber-text text-lighten-1 modal-trigger"><i class="fas fa-search"></i>   <span class="small-push">Search</span></a></li>
+                    <li sec:authorize="!isAuthenticated()"><a href="/login" class="amber-text text-lighten-1"><i class="fas fa-sign-in-alt"></i>  <span class="small-push">Log-In</span></a></li>
+                    <li sec:authorize="!isAuthenticated()"><a href="/register" class="amber-text text-lighten-1"><i class="fas fa-user-plus"></i>  <span class="small-push">Register A New User</span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="/students" class="amber-text text-lighten-1"><i class="fas fa-user-graduate"></i>  <span class="small-push">All Students</span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="/users/profile" class="amber-text text-lighten-1"><i class="fas fa-user-tie"></i>  <span class="small-push">View Profile</span></a></li>
+                    <li sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" th:method="post" id="form1">
+                            <a onclick="document.getElementById('form1').submit();" class="amber-text text-lighten-1"><i class="fas fa-sign-out-alt"></i>  <span class="small-push">Log-Out</span></a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="search-modal" class="modal card white">
+                <div class="card-image">
+                    <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title black-text">What did you want to search?</h3>
+                    <form action="" th:action="@{/search}" method="post">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p class="black-text">Search Options</p>
+                                <select id="search-params" name="search-params" class="cyan lighten-5 move-it bluer-text">
+                                    <option value="9">General Search</option>
+                                    <option value="1">Student Name</option>
+                                    <option value="2">Grade Level</option>
+                                    <option value="3">Campus Name</option>
+                                    <option value="4">Campus ID</option>
+                                    <option value="5">Entry Date</option>
+                                </select>
+                            </div>
+                            <div class="small-space"></div>
+                            <div class="input-field col s12">
+                                <input id="query" name="query" type="text" class="validate" />
+                                <label for="query">Query</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer white">
+                            <button type="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4"><span class="help-this"><i class="fas fa-binoculars"></i>  Find</span></button>
+                            <a href="#" class="modal-close waves-effect waves-teal btn-small red accent-3"><span class="help-this"><i class="fas fa-window-close"></i>  Close</span></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <footer th:fragment="ten-footer" class="page-footer black">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="amber-text text-lighten-1">Texas Educators Network</h5>
+                    <p class="amber-text text-lighten-1">The Texas Educators Network is only for use by members of the T.E.N.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="amber-text text-lighten-1">Links</h5>
+                    <ul>
+                        <li><a href="#search-modal" class="amber-text text-lighten-1 modal-trigger"><i class="fas fa-search"></i>   Search</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright amber lighten-1">
+            <div class="container black-text">
+                David Stephens 2019.
+            </div>
+        </div>
+    </footer>
+
+
+    <script th:fragment="m-script" th:src="@{/js/materialize.min.js}"></script>
+    <script th:fragment="j-query" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:fragment="modals-js">
+        $(document).ready(function(){
+            $('.modal').modal();
+            $('select').formSelect();
+        });
+    </script>
+</body>
+</html>
