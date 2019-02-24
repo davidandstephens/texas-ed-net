@@ -22,6 +22,7 @@
                     <li sec:authorize="!isAuthenticated()"><a href="/register" class="amber-text text-lighten-1"><i class="fas fa-user-plus"></i>  <span class="small-push">Register A New User</span></a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/students" class="amber-text text-lighten-1"><i class="fas fa-user-graduate"></i>  <span class="small-push">All Students</span></a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/campuses" class="amber-text text-lighten-1"><i class="fas fa-school"></i>  <span class="small-push">All Campuses</span></a></li>
+                    <li sec:authorize="isAuthenticated()" class="hide-me"><a href="/welcome" class="amber-text text-lighten-1"><i class="fas fa-address-card"></i>  <span class="small-push">User Controls</span></a></li>
                     <li sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" th:method="post" id="form1">
                             <a onclick="document.getElementById('form1').submit();" class="amber-text text-lighten-1"><i class="fas fa-sign-out-alt"></i>  <span class="small-push">Log-Out</span></a>
@@ -81,6 +82,7 @@
                         <li sec:authorize="!isAuthenticated()"><a href="/register" class="amber-text text-lighten-1"><i class="fas fa-user-plus"></i>  <span class="small-push">Register A New User</span></a></li>
                         <li sec:authorize="isAuthenticated()"><a href="/students" class="amber-text text-lighten-1"><i class="fas fa-user-graduate"></i>  <span class="small-push">All Students</span></a></li>
                         <li sec:authorize="isAuthenticated()"><a href="/campuses" class="amber-text text-lighten-1"><i class="fas fa-school"></i>  <span class="small-push">All Campuses</span></a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/welcome" class="amber-text text-lighten-1"><i class="fas fa-address-card"></i>  <span class="small-push">User Controls</span></a></li>
                         <li sec:authorize="isAuthenticated()">
                             <form th:action="@{/logout}" th:method="post" id="form2">
                                 <a onclick="document.getElementById('form1').submit();" class="amber-text text-lighten-1"><i class="fas fa-sign-out-alt"></i>  <span class="small-push">Log-Out</span></a>

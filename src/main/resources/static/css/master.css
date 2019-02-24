@@ -60,3 +60,9 @@ main {
     color: #ffca28;
     opacity: 1;
 }
+
+@media (max-width: 1164px){
+    .hide-me {
+        display: none;
+    }
+}

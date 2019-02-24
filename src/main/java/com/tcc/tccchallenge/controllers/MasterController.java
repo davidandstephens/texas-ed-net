@@ -49,7 +49,7 @@ public class MasterController {
     @GetMapping("/register")
     public String showSignupForm(Model model){
         if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-            return "redirect:/";
+            return "redirect:/welcome";
         }
         model.addAttribute("user", new User());
         return "register";
@@ -73,6 +73,39 @@ public class MasterController {
         SecurityContextHolder.getContext().setAuthentication(registeredUser);
 
         return "redirect:/";
+    }
+
+    @GetMapping("users/edit")
+    public String editUserForm(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        return "edit-user";
+    }
+
+    @PostMapping("/users/edit")
+    public String saverUserUpdate(@ModelAttribute User user, @RequestParam(name = "username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password, @RequestParam(name = "password-confirm") String confirm) {
+        if (!password.equals(confirm)) {
+            return "redirect:/users/edit";
+        }
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String hash = passwordEncoder.encode(password);
+        user.setId(currentUser.getId());
+        user.setPassword(hash);
+        user.setUsername(username);
+        user.setEmail(email);
+        userDao.save(user);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        userDetails.setUsername(username);
+        userDetails.setEmail(email);
+        userDetails.setPassword(hash);
+        return "redirect:/";
+    }
+
+    @GetMapping("/welcome")
+    public String welcomeUser(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return "landing";
     }
 
     @PostMapping("/search")
@@ -162,6 +195,36 @@ public class MasterController {
     public String showCampuses(Model model) {
         model.addAttribute("allCampuses", campusDao.findAll());
         return "all-campuses";
+    }
+
+    @GetMapping("/students/add")
+    public String getAddStudentForm(Model model){
+        List<String> takenIds = new ArrayList<>();
+        List<Student> allStudents = Lists.newArrayList(studentDao.findAll());
+        for (Student student : allStudents){
+            takenIds.add(student.getStudentId());
+        }
+        model.addAttribute("student", new Student());
+        model.addAttribute("takenIds", takenIds);
+        model.addAttribute("allCampuses", campusDao.findAll());
+        return "add";
+    }
+
+    @PostMapping("/students/add")
+    public String newStudent(@ModelAttribute Student student, @RequestParam(name = "name") String name, @RequestParam(name = "month") String month, @RequestParam(name = "day") String day, @RequestParam(name = "year") String year, @RequestParam(name = "gradeLevel") String gradeLevel, @RequestParam(name = "studentId") String studentId, @RequestParam(name = "campus_id") String campus_id) {
+        long newId = Long.parseLong(campus_id);
+        student.setCampus(campusDao.findOne(newId));
+        student.setGradeLevel(gradeLevel);
+        student.setName(name);
+        student.setStudentId(studentId);
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-" + day);
+            student.setEntryDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        studentDao.save(student);
+        return "redirect:/students";
     }
 
     @GetMapping("/students/{id}")

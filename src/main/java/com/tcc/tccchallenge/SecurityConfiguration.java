@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/") // user's home page, it can be any URL
+                .defaultSuccessUrl("/welcome") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
                 .and()
@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/search", "/search/results", "/campus/{id}"
+                        "/search", "/search/results", "/campus/{id}", "/welcome", "/users/edit", "/students/add", "/students/{id}", "/campuses", "/campuses/{id}", "/students/{id}/delete"
                 )
                 .authenticated()
         ;
