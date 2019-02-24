@@ -14,7 +14,7 @@ public class Campus {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique=true)
     private String campusId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "campus")

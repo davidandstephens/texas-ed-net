@@ -19,7 +19,6 @@ public class Student {
     private String gradeLevel;
 
     @Column(nullable = false, columnDefinition="date")
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
     @JsonFormat(pattern="MM/dd/yyyy")
     private Date entryDate;
 
@@ -42,6 +41,10 @@ public class Student {
         this.studentId = studentId;
         this.campus = campus;
         this.schoolYear = schoolYear;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getId() {

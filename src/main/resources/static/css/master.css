@@ -3,6 +3,16 @@
     font-family: 'Titillium Web', sans-serif;
 }
 
+button {
+    font-size: 20px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+input {
+    font-size: 20px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
 .ten-logo {
     max-height: 64px;
 }
@@ -26,4 +36,27 @@ main {
 .help-this {
     position: relative;
     bottom: 14px;
+}
+
+.input-group-btn {
+    width: 1%;
+}
+
+.display-none {
+    display: none;
+}
+
+#topbarsearch .input-field .prefix {
+    width:0rem !important;
+}
+#topbarsearch nav ul li:hover, nav ul li.active {
+    background-color: black !important;
+}
+.input-field .prefix ~ input, .input-field .prefix ~ textarea, .input-field .prefix ~ label, .input-field .prefix ~ .validate ~ label, .input-field .prefix ~ .autocomplete-content{
+    margin-left: 1rem !important;
+}
+
+::placeholder {
+    color: #ffca28;
+    opacity: 1;
 }

@@ -11,17 +11,17 @@
     <title th:text="${title}"></title>
 </head>
 
-<body class="grey-text text-darken-4">
+<body>
     <nav th:fragment="navbar" class="black">
         <div class="nav-wrapper">
             <div class="container">
                 <a href="/"><img src="../static/img/TEN.png" th:src="@{~/img/TEN.png}" alt="logo" class="ten-logo" /></a>
                 <ul id="nav-mobile" class="right">
-                    <li sec:authorize="isAuthenticated()"><a href="#search-modal" class="amber-text text-lighten-1 modal-trigger"><i class="fas fa-search"></i>   <span class="small-push">Search</span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="#search-modal" class="amber-text text-lighten-1 modal-trigger"><i class="fas fa-search"></i>   <span class="small-push">  Search</span></a></li>
                     <li sec:authorize="!isAuthenticated()"><a href="/login" class="amber-text text-lighten-1"><i class="fas fa-sign-in-alt"></i>  <span class="small-push">Log-In</span></a></li>
                     <li sec:authorize="!isAuthenticated()"><a href="/register" class="amber-text text-lighten-1"><i class="fas fa-user-plus"></i>  <span class="small-push">Register A New User</span></a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/students" class="amber-text text-lighten-1"><i class="fas fa-user-graduate"></i>  <span class="small-push">All Students</span></a></li>
-                    <li sec:authorize="isAuthenticated()"><a href="/users/profile" class="amber-text text-lighten-1"><i class="fas fa-user-tie"></i>  <span class="small-push">View Profile</span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="/campuses" class="amber-text text-lighten-1"><i class="fas fa-school"></i>  <span class="small-push">All Campuses</span></a></li>
                     <li sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" th:method="post" id="form1">
                             <a onclick="document.getElementById('form1').submit();" class="amber-text text-lighten-1"><i class="fas fa-sign-out-alt"></i>  <span class="small-push">Log-Out</span></a>
@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <p class="black-text">Search Options</p>
-                                <select id="search-params" name="search-params" class="cyan lighten-5 move-it bluer-text">
+                                <select id="search-params" name="search-params" class="cyan lighten-5 move-it black-text">
                                     <option value="9">General Search</option>
                                     <option value="1">Student Name</option>
                                     <option value="2">Grade Level</option>
@@ -76,7 +76,16 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="amber-text text-lighten-1">Links</h5>
                     <ul>
-                        <li><a href="#search-modal" class="amber-text text-lighten-1 modal-trigger"><i class="fas fa-search"></i>   Search</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="#search-modal" class="amber-text text-lighten-1 modal-trigger"><i class="fas fa-search"></i>   <span class="small-push">Search</span></a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="/login" class="amber-text text-lighten-1"><i class="fas fa-sign-in-alt"></i>  <span class="small-push">Log-In</span></a></li>
+                        <li sec:authorize="!isAuthenticated()"><a href="/register" class="amber-text text-lighten-1"><i class="fas fa-user-plus"></i>  <span class="small-push">Register A New User</span></a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/students" class="amber-text text-lighten-1"><i class="fas fa-user-graduate"></i>  <span class="small-push">All Students</span></a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/campuses" class="amber-text text-lighten-1"><i class="fas fa-school"></i>  <span class="small-push">All Campuses</span></a></li>
+                        <li sec:authorize="isAuthenticated()">
+                            <form th:action="@{/logout}" th:method="post" id="form2">
+                                <a onclick="document.getElementById('form1').submit();" class="amber-text text-lighten-1"><i class="fas fa-sign-out-alt"></i>  <span class="small-push">Log-Out</span></a>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head ('All Campuses')" />
+<body class="grey darken-2">
+<script th:replace="partials :: j-query" />
+<header>
+
+    <nav th:replace="partials :: navbar" />
+
+</header>
+
+<main class="container">
+    <div class="card white">
+        <div class="card-image">
+            <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Schools</h3>
+            <p>You are seeing all schools in th Texas Educators Network.</p>
+            <table class="striped">
+                <tr>
+                    <th>
+                        Campus ID
+                    </th>
+                    <th>
+                        Campus Name
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Active
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+                <tr th:each="campus : ${allCampuses}">
+                    <td th:text="${campus.campus_id}" />
+                    <td th:text="${campus.name}" />
+                    <td th:text="${campus.city}" />
+                    <td>
+                        <span th:if="${campus.isActive() == true}">
+                            <i class="fas fa-check green-text text-accent-4"></i>
+                        </span>
+                        <span th:unless="${campus.isActive() == true}">
+                            <i class="fas fa-times red-text text-accent-3"></i>
+                        </span>
+                    </td>
+                    <td><a th:href="@{'/campuses/' + ${campus.campus_id}}">View Students</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="partials :: ten-footer" />
+<script th:replace="partials :: m-script" />
+<script th:replace="partials :: modals-js" />
+</body>
+</html>

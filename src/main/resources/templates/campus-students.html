@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head ('Search Results')" />
+<head th:replace="partials :: head ('Campus Students')" />
 <body class="grey darken-2">
 <script th:replace="partials :: j-query" />
 <header>
@@ -15,8 +15,8 @@
             <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
         </div>
         <div class="card-content">
-            <h3 class="card-title">Search Results</h3>
-            <p>Showing the results for: <em>"<span th:text="${query}" />"</em></p>
+            <h3 class="card-title"><span th:text="${campusName}" /> Students</h3>
+            <p>You are seeing all students at <span th:text="${campusName}" /></p>
             <table class="striped">
                 <tr>
                     <th>
@@ -37,14 +37,20 @@
                     <th>
                         School Year
                     </th>
+                    <th>
+
+                    </th>
                 </tr>
-                <tr th:each="student : ${searchResults}">
+                <tr th:each="student : ${campusStudents}">
                     <td th:text="${student.studentId}" />
                     <td th:text="${student.name}" />
                     <td th:text="${student.campus.campus_id}" />
                     <td th:text="${student.gradeLevel}" />
                     <td th:text="${formatter.format(student.entryDate)}" />
                     <td th:text="${student.schoolYear}" />
+                    <td>
+                        <a th:href="@{'/students/' + ${student.studentId}}">Edit Student</a>
+                    </td>
                 </tr>
             </table>
         </div>

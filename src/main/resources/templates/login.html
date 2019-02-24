@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head ('Login')" />
+<body class="grey darken-2">
+<script th:replace="partials :: j-query" />
+<header>
+
+    <nav th:replace="partials :: navbar" />
+
+</header>
+
+<main class="container">
+    <div class="card white">
+        <div class="card-image">
+            <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+        </div>
+        <div class="card-content">
+            <h3 class="card-title black-text">Log In</h3>
+            <div th:if="${param.error}">
+                Invalid Username and Password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form action="" th:action="@{/login}" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="username" name="username" type="text" class="validate" />
+                        <label for="username">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password" class="validate" />
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <button type="submit" value="Log In" class="waves-effect waves-teal btn-small green accent-4"><i class="fas fa-smile-beam"></i>  Log In</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="partials :: ten-footer" />
+<script th:replace="partials :: m-script" />
+<script th:replace="partials :: modals-js" />
+</body>
+</html>

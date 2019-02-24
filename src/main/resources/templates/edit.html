@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head ('Edit Student')" />
+<body class="grey darken-2">
+<script th:replace="partials :: j-query" />
+<header>
+
+    <nav th:replace="partials :: navbar" />
+
+</header>
+
+<main class="container">
+    <div class="card white">
+        <div class="card-image">
+            <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Sign-up</h3>
+            <form id="edit-student" action="" th:action="@{/students/{id}(id=${id})}" method="post" th:object="${student}">
+                <input type="hidden" th:field="${student.id}" name="id" id="id" />
+                <span id="campus_num" class="display-none" th:text="${student.campus.id}" />
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" name="name" type="text" class="validate" th:field="${student.name}" />
+                        <label for="name">Student Name</label>
+                        <span class="helper-text" data-success="Great"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input readonly="true" id="studentId" name="studentId" type="text" class="validate" th:field="${student.studentId}" />
+                        <label for="studentId">Student ID</label>
+                        <span class="helper-text" data-success="Excellent"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <span class="display-none" id="date-var" th:text="${date}"></span>
+                        <p class="black-text">Entry Date</p>
+                        <select id="month" name="month" class="black-text">
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s4">
+                        <p class="white-text">Entry Date</p>
+                        <select id="day" name="day" class="black-text">
+                            <option value="01">1</option>
+                            <option value="02">2</option>
+                            <option value="03">3</option>
+                            <option value="04">4</option>
+                            <option value="05">5</option>
+                            <option value="06">6</option>
+                            <option value="07">7</option>
+                            <option value="08">8</option>
+                            <option value="09">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s4">
+                        <p class="white-text">Entry Date</p>
+                        <select id="year" name="year" class="black-text">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p class="black-text">Grade Level</p>
+                        <select id="gradeLevel" name="gradeLevel" class="black-text" th:field="${student.gradeLevel}">
+                            <option value="01">First Grade</option>
+                            <option value="02">Second Grade</option>
+                            <option value="03">Third Grade</option>
+                            <option value="04">Fourth Grade</option>
+                            <option value="05">Fifth Grade</option>
+                            <option value="06">Sixth Grade</option>
+                            <option value="07">Seventh Grade</option>
+                            <option value="08">Eighth Grade</option>
+                            <option value="09">Ninth Grade</option>
+                            <option value="10">Tenth Grade</option>
+                            <option value="11">Eleventh Grade</option>
+                            <option value="12">Twelfth Grade</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p class="black-text">School Year</p>
+                        <select id="schoolYear" name="schoolYear" class="black-text" th:field="${student.schoolYear}">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p class="black-text">Campus Select</p>
+                        <select id="campus_id" name="campus_id" class="black-text">
+                            <option th:each="campus : ${allCampuses}" th:value="${campus.id}" th:text="${campus.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4" onClick="empty()"><i class="fas fa-smile-beam"></i>  Submit</button>
+                <a class="waves-effect waves-teal btn-small red accent-3 modal-trigger" href="#delete-modal"><i class="fas fa-trash"></i>  Delete</a>
+            </form>
+
+            <div id="delete-modal" class="modal card white">
+                <div class="card-image">
+                    <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        Are you sure you wish to delete this student?
+                    </h3>
+                    <p>Once you delete a student from the database, there's no going back. This is a permanent action.</p>
+                    <form action="" th:action="@{/students/{id}/delete(id=${id})}" method="post" th:object="${student}">
+                        <button type="submit" value="submit" class="waves-effect waves-teal btn-small red accent-3"><i class="fas fa-thumbs-up"></i>  Yes</button>
+                        <a class="waves-effect waves-teal btn-small indigo accent-3 modal-close" href="#"><i class="fas fa-thumbs-down"></i>  No</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="partials :: ten-footer" />
+<script th:replace="partials :: m-script" />
+<script th:replace="partials :: modals-js" />
+<script>
+    for (i = new Date().getFullYear(); i >= 1990; i--)
+    {
+        $('#year').append($('<option />').val(i).html(i));
+    }
+    for (i = new Date().getFullYear() + 1; i >= 1990; i--)
+    {
+        $('#schoolYear').append($('<option />').val(i).html(i));
+    }
+    var date = $('#date-var').text();
+    var campId = $('#campus_num').text();
+    var year = date.substring(0,4);
+    var month = date.substring(5,7);
+    var day = date.substring(8,10);
+    $('#year').val(year);
+    $('#month').val(month);
+    $('#day').val(day);
+    $('#campus_id').val(campId);
+    $('#schoolYear').val(new Date().getFullYear());
+    $('#register-form').submit(function() {
+        if ($.trim($("#name").val()) === "" || $.trim($("#entryDate").val()) === "" || $.trim($("#gradeLevel").val()) === "" || $.trim($("#campusId").val()) === "") {
+            return false;
+        }
+    });
+</script>
+</body>
+</html>

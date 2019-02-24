@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head ('Register New User')" />
+<body class="grey darken-2">
+<script th:replace="partials :: j-query" />
+<header>
+
+    <nav th:replace="partials :: navbar" />
+
+</header>
+
+<main class="container">
+    <div class="card white">
+        <div class="card-image">
+            <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Sign-up</h3>
+            <form id="register-form" action="" th:action="@{/register}" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="username" name="username" type="text" class="validate" />
+                        <label for="username">Username</label>
+                        <span class="helper-text" data-success="Great"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" name="email" type="email" class="validate" />
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="Please enter a valid e-mail address" data-success="Excellent"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password" class="validate" />
+                        <label for="password">Password</label>
+                        <span class="helper-text" data-error="Your passwords don't match!" data-success="Beautiful"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password-confirm" name="password-confirm" type="password" class="validate" />
+                        <label for="password-confirm">Confirm Password</label>
+                        <span class="helper-text" data-error="Your passwords don't match!" data-success="Fantastic"></span>
+                    </div>
+                </div>
+                <button type="submit" id="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4" onClick="empty()"><i class="fas fa-smile-beam"></i>  Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="partials :: ten-footer" />
+<script th:replace="partials :: m-script" />
+<script th:replace="partials :: modals-js" />
+<script>
+    $('#register-form').submit(function() {
+        if ($.trim($("#email").val()) === "" || $.trim($("#username").val()) === "" || $.trim($("#password").val()) === "" || $.trim($("#password-confirm").val()) === "" || $.trim($("#password-confirm").val()) !== $.trim($("#password").val())) {
+            return false;
+        }
+    });
+
+    $("#password").on("focusout", function (e) {
+        if ($(this).val() != $("#password-confirm").val()) {
+            $("#password-confirm").removeClass("valid").addClass("invalid");
+        } else {
+            $("#password-confirm").removeClass("invalid").addClass("valid");
+        }
+    });
+
+    $("#password-confirm").on("keyup", function (e) {
+        if ($("#password").val() != $(this).val()) {
+            $(this).removeClass("valid").addClass("invalid");
+        } else {
+            $(this).removeClass("invalid").addClass("valid");
+        }
+    });
+
+    $("#password-confirm").on("focusout", function (e) {
+        if ($(this).val() != $("#password").val()) {
+            $("#password").removeClass("valid").addClass("invalid");
+        } else {
+            $("#password").removeClass("invalid").addClass("valid");
+        }
+    });
+
+    $("#password").on("keyup", function (e) {
+        if ($("#password-confirm").val() != $(this).val()) {
+            $(this).removeClass("valid").addClass("invalid");
+        } else {
+            $(this).removeClass("invalid").addClass("valid");
+        }
+    });
+</script>
+</body>
+</html>
