@@ -15,7 +15,7 @@
             <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
         </div>
         <div class="card-content">
-            <h3 class="card-title">Sign-up</h3>
+            <h3 class="card-title">Edit Student Details</h3>
             <form id="edit-student" action="" th:action="@{/students/{id}(id=${id})}" method="post" th:object="${student}">
                 <input type="hidden" th:field="${student.id}" name="id" id="id" />
                 <span id="campus_num" class="display-none" th:text="${student.campus.id}" />
@@ -131,8 +131,8 @@
                     </div>
                 </div>
 
-                <button type="submit" id="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4" onClick="empty()"><i class="fas fa-smile-beam"></i>  Submit</button>
-                <a class="waves-effect waves-teal btn-small red accent-3 modal-trigger" href="#delete-modal"><i class="fas fa-trash"></i>  Delete</a>
+                <button type="submit" id="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4" onClick="empty()"><span><i class="fas fa-smile-beam"></i>  Submit</span></button>
+                <a class="waves-effect waves-teal btn-small red accent-3 modal-trigger" href="#delete-modal"><span><i class="fas fa-trash"></i>  Delete</span></a>
             </form>
 
             <div id="delete-modal" class="modal card white">
@@ -145,8 +145,8 @@
                     </h3>
                     <p>Once you delete a student from the database, there's no going back. This is a permanent action.</p>
                     <form action="" th:action="@{/students/{id}/delete(id=${id})}" method="post" th:object="${student}">
-                        <button type="submit" value="submit" class="waves-effect waves-teal btn-small red accent-3"><i class="fas fa-thumbs-up"></i>  Yes</button>
-                        <a class="waves-effect waves-teal btn-small indigo accent-3 modal-close" href="#"><i class="fas fa-thumbs-down"></i>  No</a>
+                        <button type="submit" value="submit" class="waves-effect waves-teal btn-small red accent-3"><span><i class="fas fa-thumbs-up"></i>  Yes</span></button>
+                        <a class="waves-effect waves-teal btn-small indigo accent-3 modal-close" href="#"><span><i class="fas fa-thumbs-down"></i>  No</span></a>
                     </form>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head ('Welcome!')" />
+<head th:replace="partials :: head ('Welcome back!')" />
 <body class="grey darken-2">
 <script th:replace="partials :: j-query" />
 <header>
@@ -17,8 +17,8 @@
         <div class="card-content">
             <h3 class="card-title">Welcome back, <span th:text="${user.username}" /></h3>
             <p>Here are some links for what you can do...</p>
-            <a class="waves-effect waves-teal btn-small indigo accent-3" th:href="@{'users/edit'}"><i class="fas fa-user-edit"></i>  Edit User Details</a>
-            <a class="waves-effect waves-teal btn-small indigo accent-3" th:href="@{'/students/add'}"><i class="fas fa-plus"></i>  Add Student</a>
+            <a class="waves-effect waves-teal btn-small indigo accent-3" th:href="@{'users/edit'}"><span><i class="fas fa-user-edit"></i>  Edit User Details</span></a>
+            <a class="waves-effect waves-teal btn-small indigo accent-3" th:href="@{'/students/add'}"><span><i class="fas fa-plus"></i>  Add Student</span></a>
         </div>
     </div>
 </main>

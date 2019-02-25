@@ -151,7 +151,6 @@ public class MasterController {
                 searchResults.addAll(studentDao.campusNameSearch(query));
                 searchResults.addAll(studentDao.campusIdSearch(query));
                 List<Student> oneSecond = Lists.newArrayList(studentDao.findAll());
-                searchResults = new ArrayList<>();
                 for (Student student : oneSecond){
                     String dateString = formatter.format(student.getEntryDate());
                     if (dateString.contains(query)) {
@@ -168,8 +167,97 @@ public class MasterController {
         return "search/results";
     }
 
+    @GetMapping("/search/advanced")
+    public String advancedSearchForm(Model model){
+        model.addAttribute("allCampuses", campusDao.findAll());
+        return "search/advanced";
+    }
+
+    @PostMapping("/search/advanced")
+    public String advancedSearchResults(Model model, @RequestParam(name = "name-query") String nameQuery, @RequestParam(name="studentID-query") String sidQuery, @RequestParam(name="campus_id_select")String campusIdQuery, @RequestParam(name="schoolYear")String schoolYearQuery, @RequestParam(name = "month") String month, @RequestParam(name = "day") String day, @RequestParam(name = "year") String year, @RequestParam(name = "gradeLevelSelect") String gradeQuery) {
+        List<Student> searchResults = Lists.newArrayList(studentDao.findAll());
+        List<Student> trash = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        if (!nameQuery.isEmpty()) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (!student.getName().contains(nameQuery)) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!sidQuery.isEmpty()) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (!student.getStudentId().contains(sidQuery)) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!campusIdQuery.equals("00")) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (student.getCampus().getId() != (Long.parseLong(campusIdQuery))) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!gradeQuery.equals("00")) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (!student.getGradeLevel().equals(gradeQuery)) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!schoolYearQuery.equals("00")) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (student.getSchoolYear() != (Long.parseLong(schoolYearQuery))) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!month.equals("00")) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (student.getEntryDate().toString().substring(5,7).equals(month)) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!day.equals("00")) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (student.getEntryDate().toString().substring(8,10).equals(day)) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        if (!year.equals("00")) {
+            trash = new ArrayList<>();
+            for (Student student : searchResults) {
+                if (student.getEntryDate().toString().substring(0,4).equals(year)) {
+                    trash.add(student);
+                }
+            }
+            searchResults.removeAll(trash);
+        }
+        model.addAttribute("formatter", formatter);
+        model.addAttribute("searchResults", searchResults);
+        return "search/results";
+    }
+
     @GetMapping("/search/results")
-    public String showResults(@ModelAttribute(name = "searchResults") ArrayList<Student> searchResults, @ModelAttribute(name = "query") String query) {
+    public String showResults(Model model, @ModelAttribute(name = "searchResults") List<Student> searchResults, @ModelAttribute(name = "query") String query) {
+        model.addAttribute("searchResults", searchResults);
         return "search/results";
     }
 

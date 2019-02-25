@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/search", "/search/results", "/campus/{id}", "/welcome", "/users/edit", "/students/add", "/students/{id}", "/campuses", "/campuses/{id}", "/students/{id}/delete"
+                        "/search", "/search/results", "/campus/{id}", "/welcome", "/users/edit", "/students/add", "/students/{id}", "/campuses", "/campuses/{id}", "/students/{id}/delete", "/search/advanced"
                 )
                 .authenticated()
         ;

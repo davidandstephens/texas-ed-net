@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head ('Register New User')" />
+<head th:replace="partials :: head ('Edit User Details')" />
 <body class="grey darken-2">
 <script th:replace="partials :: j-query" />
 <header>
@@ -15,7 +15,7 @@
             <img src="../static/img/TENBar.png" th:src="@{~/img/TENBar.png}" alt="colorful bar" />
         </div>
         <div class="card-content">
-            <h3 class="card-title">Sign-up</h3>
+            <h3 class="card-title">Edit User Details</h3>
             <form id="register-form" action="" th:action="@{/users/edit}" method="post">
                 <div class="row">
                     <div class="input-field col s12">
@@ -45,7 +45,7 @@
                         <span class="helper-text" data-error="Your passwords don't match!" data-success="Fantastic"></span>
                     </div>
                 </div>
-                <button type="submit" id="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4" onClick="empty()"><i class="fas fa-smile-beam"></i>  Submit</button>
+                <button type="submit" id="submit" value="submit" class="waves-effect waves-teal btn-small green accent-4" onClick="empty()"><span><i class="fas fa-smile-beam"></i>  Submit</span></button>
             </form>
         </div>
     </div>
